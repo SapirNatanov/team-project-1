@@ -1,5 +1,9 @@
 # project 1.
-# Dor maudi - 207055138, Sapir natanov - 322378068, Noa yesharzadeh - 208595157, Segev izac - 207938085, Yinon alfasi - 208810374
+# Dor maudi - 207055138.
+# Sapir natanov - 322378068.
+# Noa yesharzadeh - 208595157.
+# Segev izac - 207938085.
+# Yinon alfasi - 208810374.
 
 def make_matrix(size):
     mat = []
