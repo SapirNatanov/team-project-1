@@ -1,3 +1,13 @@
+'''
+Date: 18/3/2024
+Group: Sapir Natanov 322378068
+Dor Maudi 207055138
+Noa Yasharzadeh 208595157
+Segev Isaac 207938085
+Group Git: https://github.com/DorMaudi/team-project-1
+Name: Sapir Natanov 322378068
+'''
+
 import numpy as np
 from numpy.linalg import norm
 
@@ -66,10 +76,14 @@ def jacobi_iterative(A, b, X0, TOL=1e-16, N=201):
 
 
 if __name__ == "__main__":
-    A = np.array([[1, -2],
-                  [2, 1]])
+    A = np.array([[2, 3, 4, 5, 6],
+            [-5, 3, 4, -2, 3],
+            [4, -5, -2, 2, 6],
+            [4, 5, -1, -2, -3],
+            [5, 5, 3, -3, 5]])
 
-    b = np.array([-2, 2])
+    b = np.array([92, 22, 42, -22, 41])
+
 
     x = np.zeros_like(b, dtype=np.double)
     solution = jacobi_iterative(A, b, x)

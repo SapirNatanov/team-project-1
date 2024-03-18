@@ -102,6 +102,13 @@ def DominantDiagonalFix(matrix, b):
         B[j] = b[i]
     return result, B
 
+def make_diagonally_dominant(A):
+    n = len(A)
+    for i in range(n):
+        row_sum = sum(abs(A[i][j]) for j in range(n) if j != i)
+        if abs(A[i][i]) <= row_sum:
+            A[i][i] = row_sum +1
+    return A
 
 def swap_rows_elementary_matrix(n, row1, row2):
     elementary_matrix = np.identity(n)

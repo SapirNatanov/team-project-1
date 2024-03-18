@@ -1,3 +1,13 @@
+'''
+Date: 18/3/2024
+Group: Sapir Natanov 322378068
+Dor Maudi 207055138
+Noa Yasharzadeh 208595157
+Segev Isaac 207938085
+Group Git: https://github.com/DorMaudi/team-project-1
+Name: Sapir Natanov 322378068
+'''
+
 import numpy as np
 from colors import bcolors
 from matrix_utility import swap_row
@@ -119,9 +129,15 @@ def backward_substitution(mat):
 
 if __name__ == '__main__':
 
-    A_b = [[1, 2, 3, 2],
-           [2, 3, 4, 2],
-           [1, 2, 8, 6]]
+    # A_b = [[1, 2, 3, 2],
+    #        [2, 3, 4, 2],
+    #        [1, 2, 8, 6]]
+
+    A_b = ([[2, 3, 4, 5, 6, 92],
+            [-5, 3, 4, -2, 3, 22],
+            [4, -5,-2, 2, 6, 42],
+            [4, 5, -1, -2, -3, -22],
+            [5, 5, 3, -3, 5,41]])
 
     np.set_printoptions(suppress=True, precision=4)
 
@@ -132,3 +148,5 @@ if __name__ == '__main__':
         print(bcolors.OKBLUE, "\nSolution for the system:")
         for x in result:
             print("{:.6f}".format(x))
+
+

@@ -1,3 +1,13 @@
+'''
+Date: 18/3/2024
+Group: Sapir Natanov 322378068
+Dor Maudi 207055138
+Noa Yasharzadeh 208595157
+Segev Isaac 207938085
+Git:https://github.com/SapirNatanov/Numerical-Analysis-2023.git
+Name: Sapir Natanov 322378068
+'''
+
 import numpy as np
 
 from colors import bcolors
@@ -81,6 +91,7 @@ def backward_substitution(A_b, U, L):
 
 
 def lu_solve(A_b):
+    N = len(A_b)
     L, U = lu(A_b)
     OgMat = np.dot(L, U)
     print("Lower triangular matrix L:\n", L)

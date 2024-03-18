@@ -1,3 +1,12 @@
+'''
+Date: 18/3/2024
+Group: Sapir Natanov 322378068
+Dor Maudi 207055138
+Noa Yasharzadeh 208595157
+Segev Isaac 207938085
+Group Git: https://github.com/DorMaudi/team-project-1
+Name: Sapir Natanov 322378068
+'''
 import math
 import numpy as np
 from colors import bcolors
@@ -69,13 +78,16 @@ def bisection_method(f, a, b, tol=1e-6):
         if abs(originalFunc(c)) > tol:
             raise ValueError("The scalars a and b do not bound a root")
 
+    if sp.floor(f(c)) != 0:
+        raise ValueError("No solution found")
+
     return c
 
 
 if __name__ == '__main__':
     x = sp.symbols('x')
-    f = x**2 - 3
-    a, b = -2, 3
+    f = (6 * x**3 + x**2 + 2)/(2 * x - 6)
+    a, b = -3, 0
     nextTest = (b - a) / 1000
     i = a + nextTest
 
@@ -84,6 +96,8 @@ if __name__ == '__main__':
             roots = bisection_method(f, a, i)
             print(bcolors.OKBLUE, f"\nThe equation f(x) has an approximate root at x = {roots}", bcolors.ENDC, "\n")
         except ValueError:
+            pass
+        except ZeroDivisionError:
             pass
         a = i
         i += nextTest
