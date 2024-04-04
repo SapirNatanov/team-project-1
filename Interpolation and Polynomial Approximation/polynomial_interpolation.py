@@ -16,9 +16,7 @@ def GaussJordanElimination(matrix, vector):
     return MulMatrixVector(invert, vector)
 
 
-
-
-def UMatrix(matrix,vector):
+def UMatrix(matrix, vector):
     """
     :param matrix: Matrix nxn
     :return:Disassembly into a  U matrix
@@ -32,7 +30,7 @@ def UMatrix(matrix,vector):
         for j in range(i + 1, len(matrix)):
             elementary = MakeIMatrix(len(matrix[0]), len(matrix))
             # Finding the M(ij) to reset the organs under the pivot
-            elementary[j][i] = -(matrix[j][i])/matrix[i][i]
+            elementary[j][i] = -(matrix[j][i]) / matrix[i][i]
             matrix = MultiplyMatrix(elementary, matrix)
     # U matrix is a doubling of elementary matrices that we used to reset organs under the pivot
     U = MultiplyMatrix(U, matrix)
@@ -53,7 +51,7 @@ def LMatrix(matrix, vector):
         for j in range(i + 1, len(matrix)):
             elementary = MakeIMatrix(len(matrix[0]), len(matrix))
             # Finding the M(ij) to reset the organs under the pivot
-            elementary[j][i] = -(matrix[j][i])/matrix[i][i]
+            elementary[j][i] = -(matrix[j][i]) / matrix[i][i]
             # L matrix is a doubling of inverse elementary matrices
             L[j][i] = (matrix[j][i]) / matrix[i][i]
             matrix = MultiplyMatrix(elementary, matrix)
@@ -73,13 +71,13 @@ def SolveLU(matrix, vector):
     return MultiplyMatrix(InverseMatrix(matrixU), MultiplyMatrix(InverseMatrix(matrixL), vector))
 
 
-def solveMatrix(matrixA,vectorb):
+def solveMatrix(matrixA, vectorb):
     detA = Determinant(matrixA, 1)
     print(bcolors.YELLOW, "\nDET(A) = ", detA)
 
     if detA != 0:
         print("CondA = ", Cond(matrixA, InverseMatrix(matrixA, vectorb)), bcolors.ENDC)
-        print(bcolors.OKBLUE, "\nnon-Singular Matrix - Perform GaussJordanElimination",bcolors.ENDC)
+        print(bcolors.OKBLUE, "\nnon-Singular Matrix - Perform GaussJordanElimination", bcolors.ENDC)
         result = GaussJordanElimination(matrixA, vectorb)
         print(np.array(result))
         return result
@@ -96,28 +94,36 @@ def solveMatrix(matrixA,vectorb):
 
 
 def polynomialInterpolation(table_points, x):
-    matrix = [[point[0] ** i for i in range(len(table_points))] for point in table_points] # Makes the initial matrix
+    x_data = [point[0] for point in table_points]
+    y_data = [point[1] for point in table_points]
 
-    b = [[point[1]] for point in table_points]
+    # Perform polynomial interpolation using numpy.polyfit
+    coefficients = np.polyfit(x_data, y_data, deg=len(x_data) - 1)
 
-    print(bcolors.OKBLUE, "The matrix obtained from the points: ", bcolors.ENDC,'\n', np.array(matrix))
-    print(bcolors.OKBLUE, "\nb vector: ", bcolors.ENDC,'\n',np.array(b))
-    matrixSol = solveMatrix(matrix, b)
+    # Construct the polynomial function
+    polynomial = np.poly1d(coefficients)
 
-    result = sum([matrixSol[i][0] * (x ** i) for i in range(len(matrixSol))])
+    # Evaluate the polynomial at the specified point
+    result = polynomial(x)
+
+    print(bcolors.OKBLUE, "The coefficients of the polynomial:", bcolors.ENDC)
+    print(coefficients)
+
     print(bcolors.OKBLUE, "\nThe polynom:", bcolors.ENDC)
-    print('P(X) = '+'+'.join([ '('+str(matrixSol[i][0])+') * x^' + str(i) + ' ' for i in range(len(matrixSol))])  )
+    print(polynomial)
+
     print(bcolors.OKGREEN, f"\nThe Result of P(X={x}) is:", bcolors.ENDC)
     print(result)
+
     return result
 
 
 if __name__ == '__main__':
-
     table_points = [(0, 0), (1, 0.8415), (2, 0.9093), (3, 0.1411), (4, -0.7568), (5, -0.9589), (6, -0.2794)]
-    x = 1.28
+    x = 2.6
     print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------\n", bcolors.ENDC)
     print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
-    print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'\n')
+    print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x, '\n')
     polynomialInterpolation(table_points, x)
-    print(bcolors.OKBLUE, "\n---------------------------------------------------------------------------\n", bcolors.ENDC)
+    print(bcolors.OKBLUE, "\n---------------------------------------------------------------------------\n",
+          bcolors.ENDC)
