@@ -1,5 +1,5 @@
 from colors import bcolors
-
+import numpy as np
 
 def lagrange_interpolation(x_data, y_data, x):
     """
@@ -31,17 +31,24 @@ def lagrange_interpolation(x_data, y_data, x):
         result += term
         polynomial_coefficients.append(term)
 
+    # polynomial = np.poly1d(polynomial_coefficients)
+    # print(polynomial)
     return tuple(polynomial_coefficients), result
 
 
 if __name__ == '__main__':
-    x_data = [1, 2, 5]
-    y_data = [1, 0, 2]
-    x_interpolate = 3  # The x-value where you want to interpolate
-
+    x_data = [0.35, 0.4, 0.55, 0.65, 0.7]
+    y_data = [-3.65, -3, -2.6, 0.2, 1.67]
+    x_interpolate = 0.45  # The x-value where you want to interpolate
+    x1 = 0.6
     try:
         polynomial_coefficients, y_interpolate = lagrange_interpolation(x_data, y_data, x_interpolate)
         print(bcolors.OKBLUE, "\nInterpolated value at x =", x_interpolate, "is y =", y_interpolate, bcolors.ENDC)
         print("Polynomial Coefficients:", polynomial_coefficients)
+
+        polynomial_coefficients, y1 = lagrange_interpolation(x_data, y_data, x1)
+        print(bcolors.OKBLUE, "\nInterpolated value at x =",x1, "is y =", y1, bcolors.ENDC)
+        print("Polynomial Coefficients:", polynomial_coefficients)
+
     except ValueError as e:
         print(bcolors.FAIL, "Error:", e, bcolors.ENDC)

@@ -17,6 +17,6 @@ def trapezoidal_rule(f, a, b, n):
 
 
 if __name__ == '__main__':
-    f = lambda x: math.tan(x)
-    result = trapezoidal_rule(f, -7, 8, 200)
-    print(bcolors.OKBLUE, "Approximate integral:", result, bcolors.ENDC)
+    f = lambda x:(math.cos(x) + (x**3 - x + 2))/(2 * math.e ** (-x + 2))
+    result = trapezoidal_rule(f, -3, -1.4, 200)
+    print(bcolors.OKBLUE, "Approximate integral:", round(result, 5), bcolors.ENDC)
